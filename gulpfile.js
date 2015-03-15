@@ -1,60 +1,61 @@
-// The default gulp task provides a good workflow.
-var gulp, clean, uglify, paths, jshint, stylish, react, karma;
+var gulp, clean, uglify, paths, jshint, stylish, react, karma, jade, concat;
+
+var require = require || function() {};
 
 gulp = require('gulp');
 clean = require('gulp-clean');
-
-karma = require('gulp-karma');
-
+karma = require('karma').server;
 jshint = require('gulp-jshint');
 stylish = require('jshint-stylish');
-
 react = require('gulp-react');
-
 concat = require('gulp-concat');
 uglify = require('gulp-uglify');
-
 jade = require('gulp-jade');
 
 paths = {
 	react: ['src/javascript/views/**/*.jsx'],
-	javascripts: ['src/javascript/app.js', 'src/javascript/lib/**/*.js', 'src/**/*.js'],
+	javascripts: ['./src/**/*.js'],
 	spec: ['spec/**/*.js'],
-	css : ['src/**/*.css'],
-	jade : ['src/**/*.jade']
+	css: ['src/**/*.css'],
+	jade: ['src/**/*.jade']
 };
 
-gulp.task('clean', function () {  
-  return gulp.src('dist/', {read: false})
-    .pipe(clean());
+gulp.task('clean', function() {
+	'use strict';
+	return gulp.src('dist/', {
+			read: false
+		})
+		.pipe(clean());
 });
 
 gulp.task('lint', function() {
-  return gulp.src(paths.javascripts)
-    .pipe(jshint())
-    .pipe(jshint.reporter(stylish));
+	'use strict';
+	return gulp.src('./src/**/*.js')
+		.pipe(jshint())
+		.pipe(jshint.reporter(stylish))
+		.on('error', function(err) {
+			throw err;
+		});
 });
 
-gulp.task('test', function() {
-  // Be sure to return the stream 
-  return gulp.src(paths.spec)
-    .pipe(karma({
-      configFile: 'karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero 
-      throw err;
-    });
+gulp.task('test', function(done) {
+	'use strict';
+	karma.start({
+		configFile: __dirname + '/karma.conf.js',
+		singleRun: true
+	}, done);
 });
 
-gulp.task('react', function () {
-    return gulp.src(paths.react)
-        .pipe(react())
-        .pipe(gulp.dest('dist'));
+gulp.task('react', function() {
+	'use strict';
+	return gulp.src(paths.react)
+        .pipe(concat('views.min.js'))
+		.pipe(react())
+		.pipe(gulp.dest('dist/views'));
 });
 
 gulp.task('javascripts', function() {
+	'use strict';
 	// Minify and copy all JavaScript (except vendor scripts)
 	return gulp.src(paths.javascripts)
 		.pipe(concat('app.min.js'))
@@ -62,28 +63,40 @@ gulp.task('javascripts', function() {
 });
 
 gulp.task('templates', function() {
-  var locals = {}
-  gulp.src('./src/*.jade')
-    .pipe(jade({
-      locals: locals
-    }))
-    .pipe(gulp.dest('dist/'))
+	'use strict';
+	var locals = {};
+	gulp.src('./src/*.jade')
+		.pipe(jade({
+			locals: locals
+		}))
+		.pipe(gulp.dest('dist/'));
 });
 
 // Copy all html
 gulp.task('copy', function() {
- return gulp.src(paths.css)
+	'use strict';
+	return gulp.src(paths.css)
 		// Pass in options to the task
 		.pipe(gulp.dest('dist/'));
 });
 
+// Copy all html
+gulp.task('libs', function() {
+    'use strict';
+    return gulp.src('./bower_components/react/react.js')
+        // Pass in options to the task
+        .pipe(gulp.dest('dist/js'));
+});
+
+
 // Rerun the task when a file changes
 gulp.task('watch', function() {
+	'use strict';
 	gulp.watch(paths.javascripts, ['build']);
 	gulp.watch(paths.jade, ['build']);
 	gulp.watch(paths.css, ['build']);
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('build', ['lint', 'test','react', 'javascripts', 'copy', 'templates']);
+gulp.task('build', ['lint', 'test', 'react', 'javascripts', 'copy', 'libs','templates']);
 gulp.task('default', ['build', 'watch']);

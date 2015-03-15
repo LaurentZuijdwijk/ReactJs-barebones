@@ -47,11 +47,38 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "// The default gulp task provides a good workflow.\nvar gulp, clean, uglify, paths, jshint, stylish, react, karma, jade, concat;\n\nvar require = require || function() {};\n\ngulp = require('gulp');\nclean = require('gulp-clean');\n\nkarma = require('gulp-karma');\n\njshint = require('gulp-jshint');\nstylish = require('jshint-stylish');\n\nreact = require('gulp-react');\n\nconcat = require('gulp-concat');\nuglify = require('gulp-uglify');\n\njade = require('gulp-jade');\n\npaths = {\n	react: ['src/javascript/views/**/*.jsx'],\n	javascripts: ['./src/**/*.js'],\n	spec: ['spec/**/*.js'],\n	css: ['src/**/*.css'],\n	jade: ['src/**/*.jade']\n};\n\ngulp.task('clean', function() {\n	'use strict';\n	return gulp.src('dist/', {\n			read: false\n		})\n		.pipe(clean());\n});\n\ngulp.task('lint', function() {\n	'use strict';\n	return gulp.src('./src/**/*.js')\n		.pipe(jshint())\n		.pipe(jshint.reporter(stylish));\n});\n\ngulp.task('test', function() {\n	'use strict';\n	// Be sure to return the stream \n	return gulp.src(paths.spec)\n		.pipe(karma({\n			configFile: 'karma.conf.js',\n			action: 'run'\n		}))\n		.on('error', function(err) {\n			// Make sure failed tests cause gulp to exit non-zero \n			throw err;\n		});\n});\n\ngulp.task('react', function() {\n	'use strict';\n	return gulp.src(paths.react)\n		.pipe(react())\n		.pipe(gulp.dest('dist/views'));\n});\n\ngulp.task('javascripts', function() {\n	'use strict';\n	// Minify and copy all JavaScript (except vendor scripts)\n	return gulp.src(paths.javascripts)\n		.pipe(concat('app.min.js'))\n		.pipe(gulp.dest('dist/js'));\n});\n\ngulp.task('templates', function() {\n	'use strict';\n	var locals = {};\n	gulp.src('./src/*.jade')\n		.pipe(jade({\n			locals: locals\n		}))\n		.pipe(gulp.dest('dist/'));\n});\n\n// Copy all html\ngulp.task('copy', function() {\n	'use strict';\n	return gulp.src(paths.css)\n		// Pass in options to the task\n		.pipe(gulp.dest('dist/'));\n});\n\n// Rerun the task when a file changes\ngulp.task('watch', function() {\n	'use strict';\n	gulp.watch(paths.javascripts, ['build']);\n	gulp.watch(paths.jade, ['build']);\n	gulp.watch(paths.css, ['build']);\n});\n\n// The default task (called when you run `gulp` from cli)\ngulp.task('build', ['lint', 'test', 'react', 'javascripts', 'copy', 'templates']);\ngulp.task('default', ['build', 'watch']);",
+			"file": "/C/Users/ik/Documents/projects/ReactJs-starter-kit/gulpfile.js",
+			"file_size": 2390,
+			"file_write_time": 130709141361151772,
+			"settings":
+			{
+				"buffer_size": 2231,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/ik/AppData/Roaming/Sublime Text 3/Packages/User/JsFormat.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 517,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "demo-service.js",
+			"settings":
+			{
+				"buffer_size": 291,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 104.0,
+		"height": 150.0,
 		"selected_items":
 		[
 			[
@@ -113,19 +140,17 @@
 	"expanded_folders":
 	[
 		"/C/Users/ik/Documents/projects/ReactJs-starter-kit",
-		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/bower_components/react",
-		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/node_modules/.bin",
-		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/node_modules/karma",
+		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/spec",
 		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/spec/models",
 		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/spec/services",
 		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/src",
 		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/src/javascript",
 		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/src/javascript/models",
-		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/src/javascript/services",
-		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/src/javascript/views"
+		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/src/javascript/services"
 	],
 	"file_history":
 	[
+		"/C/Users/ik/AppData/Roaming/Sublime Text 3/Packages/JsFormat/JsFormat.sublime-settings",
 		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/src/javascript/services/demo-service.js",
 		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/spec/services/demo-service-test.js",
 		"/C/Users/ik/Documents/projects/ReactJs-starter-kit/gulpfile.js",
@@ -240,8 +265,96 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/ik/Documents/projects/ReactJs-starter-kit/gulpfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2231,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								512,
+								512
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/ik/AppData/Roaming/Sublime Text 3/Packages/User/JsFormat.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 517,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								54,
+								54
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "demo-service.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 291,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								245,
+								245
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -284,7 +397,7 @@
 	{
 		"height": 0.0
 	},
-	"project": "reactjs-barebones.sublime-project",
+	"project": "/C/Users/ik/Documents/projects/ReactJs-starter-kit/reactjs-barebones.sublime-project",
 	"replace":
 	{
 		"height": 56.0

@@ -3,5 +3,7 @@ var HelloMessage = React.createClass({
     return <div>Hello {this.props.name}</div>;
   }
 });
+window.addEventListener("load", function(){
 
-React.render(<HelloMessage name="John" />, mountNode);
+	React.render(<HelloMessage name="John" />, document.getElementById('target'));
+});

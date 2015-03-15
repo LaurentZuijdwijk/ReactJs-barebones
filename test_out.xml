@@ -1,16 +1,11 @@
 <?xml version="1.0"?>
 <testsuites>
-  <testsuite name="Chrome 41.0.2272 (Windows 8.1)" package="unit" timestamp="2015-03-15T17:14:30" id="0" hostname="mine">
-    <properties>
-      <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36"/>
-    </properties>
-  </testsuite>
-  <testsuite name="Chrome 41.0.2272 (Windows 8.1)" package="unit" timestamp="2015-03-15T17:14:30" id="0" hostname="mine" tests="2" errors="0" failures="0" time="0.002">
+  <testsuite name="Chrome 41.0.2272 (Windows 8.1)" package="unit" timestamp="2015-03-15T18:07:11" id="0" hostname="mine" tests="2" errors="0" failures="0" time="0.003">
     <properties>
       <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36"/>
     </properties>
     <testcase name="should be defined" time="0.001" classname="unit Chrome 41.0.2272 (Windows 8.1).Demo service spec"/>
-    <testcase name="should get data" time="0.001" classname="unit Chrome 41.0.2272 (Windows 8.1).Demo service spec"/>
+    <testcase name="should get data" time="0.002" classname="unit Chrome 41.0.2272 (Windows 8.1).Demo service spec"/>
     <system-out><![CDATA[
 ]]></system-out>
     <system-err/>

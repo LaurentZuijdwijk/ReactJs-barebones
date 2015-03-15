@@ -11,7 +11,6 @@
     "gulp-concat": "^2.2.0",
     "gulp-jade": "^1.0.0",
     "gulp-jshint": "^1.9.2",
-    "gulp-karma": "0.0.4",
     "gulp-react": "^3.0.1",
     "gulp-sourcemaps": "^1.2.8",
     "gulp-uglify": "^0.2.1",
