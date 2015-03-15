@@ -5,5 +5,5 @@ var HelloMessage = React.createClass({
 });
 window.addEventListener("load", function(){
 
-	React.render(<HelloMessage name="John" />, document.getElementById('target'));
+	React.render(<HelloMessage name="World" />, document.getElementById('target'));
 });
