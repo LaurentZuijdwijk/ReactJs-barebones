@@ -1,0 +1,26 @@
+{
+  "name": "ReactJs-starter-kit",
+  "version": "0.0.1",
+  "description": "Barebones ReactJS project",
+  "moduleType": [
+    "es6",
+    "globals"
+  ],
+  "keywords": [
+    "ReactJS",
+    "barebones",
+    "starter",
+    "kit"
+  ],
+  "authors": [
+    "Laurent Zuijdwijk"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
