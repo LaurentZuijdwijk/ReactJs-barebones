@@ -14,5 +14,5 @@ Fully set up empty ReactJS project including:
 Clone this project and run the following steps to get up and running.
 
 - change the project names
--`npm install`
--`gulp`
+- `npm install`
+- `gulp`
