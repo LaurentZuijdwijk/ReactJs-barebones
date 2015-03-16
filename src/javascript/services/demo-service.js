@@ -11,6 +11,5 @@ Demo.services.DemoService = (function() {
 		}
 		return {};
 	};
-
 	return instance;
 })();

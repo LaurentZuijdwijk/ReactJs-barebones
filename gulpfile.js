@@ -1,4 +1,4 @@
-var gulp, clean, uglify, paths, jshint, stylish, react, karma, jade, concat;
+var gulp, clean, uglify, paths, jshint, stylish, react, karma, jade, concat, sourcemaps;
 
 var require = require || function() {};
 
@@ -11,6 +11,7 @@ react = require('gulp-react');
 concat = require('gulp-concat');
 uglify = require('gulp-uglify');
 jade = require('gulp-jade');
+sourcemaps = require('gulp-sourcemaps');
 
 paths = {
 	react: ['src/javascript/views/**/*.jsx'],
@@ -49,7 +50,7 @@ gulp.task('test', function(done) {
 gulp.task('react', function() {
 	'use strict';
 	return gulp.src(paths.react)
-        .pipe(concat('views.min.js'))
+		.pipe(concat('views.min.js'))
 		.pipe(react())
 		.pipe(gulp.dest('dist/views'));
 });
@@ -58,7 +59,9 @@ gulp.task('javascripts', function() {
 	'use strict';
 	// Minify and copy all JavaScript (except vendor scripts)
 	return gulp.src(paths.javascripts)
+		.pipe(sourcemaps.init())
 		.pipe(concat('app.min.js'))
+		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('dist/js'));
 });
 
@@ -82,10 +85,10 @@ gulp.task('copy', function() {
 
 // Copy all html
 gulp.task('libs', function() {
-    'use strict';
-    return gulp.src('./bower_components/react/react.js')
-        // Pass in options to the task
-        .pipe(gulp.dest('dist/js'));
+	'use strict';
+	return gulp.src('./bower_components/react/react.js')
+		// Pass in options to the task
+		.pipe(gulp.dest('dist/js'));
 });
 
 
@@ -98,5 +101,5 @@ gulp.task('watch', function() {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('build', ['lint', 'test', 'react', 'javascripts', 'copy', 'libs','templates']);
+gulp.task('build', ['lint', 'test', 'react', 'javascripts', 'copy', 'libs', 'templates']);
 gulp.task('default', ['build', 'watch']);
